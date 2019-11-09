@@ -5,37 +5,38 @@ import { Injectable } from '@angular/core';
 })
 export class DynamicArray<T> {
 
-    array : Array<T>;
-    size: number;   
+    array: Array<T>;
     capacity: number;
+    size: number;   
 
     constructor(){
+        this.array = new Array<T>(1);
+        this.capacity = 1;
         this.size = 0;
-        this.capacity = 100000;
     }
 
-    get(index: number){
-        if(index < 0 || index >= this.size){
+    get(index: number) : T {
+        if(index < 0 || index >= this.size) {
             console.error("Error!!. Index out of range");
-        }else{
+        } else {
             return this.array[index];
         }
     }
 
-    set(index: number, val : T){
-        if(index >= this.size){
+    set(index: number, val : T) {
+        if(index >= this.size) {
             console.error("Error!!. Index out of range");
-        }else{
+        } else {
             this.array[index] = val;
         }
     }
 
-    pushBack(val: T){
-        if(this.size == this.capacity){
-            let new_array = new Array<T>();
-
-            for(let i = 0; i < this.size; i++)
+    pushBack(val: T) {
+        if(this.size == this.capacity) {
+            let new_array = new Array(this.capacity * 2);//arreglo con el doble de capacidad
+            for(let i = 0; i < this.size; i++) {
                 new_array[i] = this.array[i];
+            }
             this.array = new_array;
             this.capacity *= 2;
         }
@@ -43,25 +44,22 @@ export class DynamicArray<T> {
         this.size++;
     }
 
-    remove(index: number){
-        if(index < 0 || index >= this.size){
+    remove(index: number) : T {
+        if(index < 0 || index >= this.size){ 
             console.error("Error!!. Index out of range");
-        }else{
-            for(let i = index; i < this.size-1; i++)
+            return null;
+        } else {
+            let val = this.array[index];
+            for(let i = index; i < this.size-1; i++) {
                 this.array[i] = this.array[i+1];
+            }
             this.size--;
+            return val;
         }
     }
 
     getSize(){
         return this.size;
-    }
-
-    find(val: T){
-        for(let i = 0; i < this.size; i++){
-            if(this.array[i] == val) 
-                return i;
-        }
     }
 
     displayArray(){
@@ -72,11 +70,6 @@ export class DynamicArray<T> {
                 console.log(this.array[i]);
             }
         }
-    }
-
-    clearArray(){
-        this.array = new Array<T>();
-        this.size = 0;
     }
 
 

@@ -1,5 +1,18 @@
 <h1>Elemment Computers</h1>
 
+<h2>Dynamic Array Test:</h2>
+<button (click)="pushValuesBack(10000)">Push 10.000 values back</button><br>
+<button (click)="pushValuesBack(100000)">Push 100.000 values back</button><br>
+<button (click)="pushValuesBack(1000000)">Push 1.000.000 values back</button><br>
+<button (click)="pushValuesBack(10000000)">Push 10.000.000 values back</button><br>
+<button (click)="pushValuesBack(100000000)">Push 100.000.000 values back</button><br>
+
+<button (click)="pushValuesBack(1)">Push back 1 value</button><br>
+<br>
+<button (click)="removeValue()">Remove 1 value</button><br>
+<br>
+<button (click)="display()">Display Array</button><br>
+
 <h2>Doubly-Linked List Test:</h2>
 <button (click)="resetList()">Reset List</button><br>
 <br>
@@ -16,23 +29,3 @@
 <button (click)="findByKey()">Find 1 node</button><br>
 <br>
 <button (click)="popBack()">Pop back 1 node</button><br>
-
-<h2>Dynamic Array Test:</h2>
-<button (click)="resetArray()">Reset Array</button><br>
-<br>
-<button (click)="pushValuesBack(1000)">Push 1.000 values back</button><br>
-<button (click)="pushValuesBack(10000)">Push 10.000 values back</button><br>
-<button (click)="pushValuesBack(100000)">Push 100.000 values back</button><br>
-<button (click)="pushValuesBack(1000000)">Push 1.000.000 values back</button><br>
-<button (click)="pushValuesBack(10000000)">Push 10.000.000 values back</button><br>
-<button (click)="pushValuesBack(100000000)">Push 100.000.000 values back</button><br>
-<br>
-<button (click)="pushValuesBack(1)">Push back 1 value</button><br>
-<br>
-<button (click)="pushValuesBack(1)">Push back 1 value</button><br>
-<br>
-<button (click)="findByValue()">Find 1 value</button><br>
-<br>
-<button (click)="removeValue()">Remove 1 value</button><br>
-<br>
-<button (click)="display()">Display Array</button><br>
