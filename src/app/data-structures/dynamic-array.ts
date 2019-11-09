@@ -1,73 +1,77 @@
 import { Injectable } from '@angular/core';
-import { Product } from './product';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
+export class DynamicArray<T> {
 
-export class DynamicArray <T>{
-    arr:T[];
-    //arr: Array<T>;
-    size: number;
-    capa: number;
+  arr: Array<T>;
+  capacity: number;
+  size: number;
 
-    constructor(){
-        this.arr = [];
-        this.capa = 0;
-        this.size = 0;
-    }
+  constructor() {
+    this.arr = new Array<T>(1);
+    this.capacity = 1;
+    this.size = 0;
+  }
 
-    setCapa(cap: number){
-        this.capa = cap;
-        //this.arr = T[cap];
-        this.arr = new Array(cap); 
+  get(i: number): T {
+    if (i < 0 || i >= this.size) {
+      console.error("Error!! Index out of range");
+      return null;
+    } else {
+      return this.arr[i];
     }
+  }
 
-    get(pos: number){
-        if(pos > this.size) return -1;
-        else return this.arr[pos];
+  set(i: number, val: T) {
+    if (i < 0 || i >= this.size) {
+      console.error("Error!! Index out of range");
+    } else {
+      this.arr[i] = val;
     }
+  }
 
-    set(pos: number, val:T){
-        if(pos> this.capa-1) console.log("Se sale.");
-        else if(pos> this.size-1) this.push(val);
-        else this.arr[pos];
+  pushBack(val: T) {
+    if (this.size == this.capacity) {
+      let arr2 = new Array(this.capacity * 2);//arreglo con el doble de capacidad
+      for (let i = 0; i < this.arr.length; i++) {
+        arr2[i] = this.arr[i];
+      }
+      this.arr = arr2;
+      this.capacity *= 2;
     }
-    
-    push(val: T){
-        if(this.capa == this.size){
-            if(this.capa == 0){
-                let narr:T[] = new Array(1);                
-                this.arr = narr;
-            }else{
-                this.capa *= 2;
-                let narr:T[] = new Array(this.capa);
-                for(var i = 0; i < this.size; i++) narr[i] = this.arr[i];  
-                this.arr = narr;    
-            }
-        }
-        this.arr[this.size] = val;
-        this.size++;    
-    }
+    this.arr[this.size] = val;
+    this.size++;
+  }
 
-    remove(pos: number){
-        if(pos > this.size-1) console.log("No hay elemento.");
-        else{
-            this.size--;
-            for(var i = pos; i < this.size; i++){
-                this.arr[i] = this.arr[i+1];
-            }
-        }
+  remove(i: number): T {
+    if (i < 0 || i >= this.size) {
+      console.error("Error!! Index out of range");
+      return null;
+    } else {
+      let val = this.arr[i];
+      for (let j = i; j < (this.size - 1); j++) {
+        this.arr[j] = this.arr[j + 1];
+      }
+      this.arr[this.size - 1] = null;
+      this.size--;
+      return val;
     }
+  }
 
-    numberElemnts(): number{
-        return this.size;
-    }
+  getSize(): number {
+    return this.size;
+  }
 
-    displayArray(){
-        for(var i = 0; i<this.size; i++){
-            console.log(this.arr[i] + "/"); 
-        } 
+  getCapacity(): number {
+    return this.capacity;
+  }
+
+  printElements() {
+    for (let i = 0; i < this.arr.length; i++) {
+      console.log(this.arr[i]);
     }
-   
+  }
+
 }
