@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DoubleLinkedList } from './data-structures/double-linked-list';
 import { Product } from './data-structures/product';
+import { DynamicArray } from './data-structures/dynamic-array';
 
 
 @Component({
@@ -10,7 +11,17 @@ import { Product } from './data-structures/product';
 })
 export class AppComponent {
 
-  constructor(private list: DoubleLinkedList<Product>){}
+  constructor(private lista: DynamicArray<number>){}
+
+  prueba(v: number){
+    //let product = new Product(1, "Product"+1);
+    this.lista.setCapa(100);
+    this.lista.push(v);
+    this.lista.displayArray();
+    console.log("hola")
+  }
+
+  /*//constructor(private list: DoubleLinkedList<Product>){}
 
   pushNodesFront(quantity: number){
 
@@ -65,6 +76,6 @@ export class AppComponent {
 
   resetList(){
     this.list.clearList();
-  }
+  }*/
 
 }
