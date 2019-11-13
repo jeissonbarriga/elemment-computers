@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DoubleLinkedList } from './data-structures/double-linked-list';
 import { Product } from './data-structures/product';
 import { DynamicArray } from './data-structures/dynamic-array';
+import { Queue } from './data-structures/queue';
 
 
 @Component({
@@ -17,8 +18,47 @@ export class AppComponent implements OnInit {
   }
 
 
-  constructor(private list: DoubleLinkedList<Product>, private dArray: DynamicArray<Product>) {
+  constructor(private list: DoubleLinkedList<Product>, private dArray: DynamicArray<Product>, private queue: Queue<Product>) {
 
+  }
+
+  qEnqueue(quantity: number) {
+    let t0 = performance.now();
+
+    for (let i = 0; i < quantity; i++) {
+      let product = new Product(i, "Product" + i);
+      this.queue.enqueue(product);
+    }
+
+    let t1 = performance.now();
+
+    console.log("enqueue " + quantity + " products took: ");
+    console.warn((t1 - t0) + " milliseconds");
+  }
+
+  qDequeue() {
+    let t0 = performance.now();
+
+    let eliminado = this.queue.dequeue();
+    console.log("Dequeued: " + eliminado.name);
+
+    let t1 = performance.now();
+
+    console.log("dequeue 1 product took: ");
+    console.warn((t1 - t0) + " milliseconds");
+
+  }
+
+  qIsEmpty() {
+    this.queue.isEmpty();
+  }
+
+  qPrintQueue() {
+    this.queue.displayQueue();
+  }
+
+  qresetQueue() {
+    this.queue.clearQueue();
   }
 
   dPushBack(quantity: number) {
