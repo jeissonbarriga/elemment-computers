@@ -3,6 +3,7 @@ import { DoubleLinkedList } from './data-structures/double-linked-list';
 import { Product } from './data-structures/product';
 import { DynamicArray } from './data-structures/dynamic-array';
 import { Queue } from './data-structures/queue';
+import { Stack } from './data-structures/stack';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  constructor(private list: DoubleLinkedList<Product>, private dArray: DynamicArray<Product>, private queue: Queue<Product>) {
+  constructor(private list: DoubleLinkedList<Product>, private dArray: DynamicArray<Product>, private queue: Queue<Product>, private pila: Stack<Product>) {
 
   }
 
@@ -61,6 +62,37 @@ export class AppComponent implements OnInit {
     this.queue.clearQueue();
   }
 
+  sPush(quantity: number){
+    let t0 = performance.now();
+    let id = this.pila.size;
+    for (let i = 0; i < quantity; i++) {
+      let product = new Product(id, "Product" + id);
+      this.pila.push(product);
+    }
+    let t1 = performance.now();
+
+    console.log("push " + quantity + " products took: ");
+    console.warn((t1 - t0) + " milliseconds");
+  }
+
+  sPrintElements() {
+    this.pila.displayStack();
+  }
+
+  sPop(){
+    this.pila.pop();
+    console.log("Salida último elemento");
+  }
+
+  sTop(){
+    console.log("Top: " + this.pila.top().name);
+  }
+
+  sClear(){
+    this.pila.clearStack();
+    console.log("Pila vacía");
+  }
+  
   dPushBack(quantity: number) {
     let t0 = performance.now();
     let id = this.dArray.getSize();
