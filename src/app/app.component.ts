@@ -80,12 +80,22 @@ export class AppComponent implements OnInit {
   }
 
   sPop(){
+    let t0 = performance.now();
     this.pila.pop();
     console.log("Salida último elemento");
+    let t1 = performance.now();
+
+    console.log("pop 1 product took: ");
+    console.warn((t1 - t0) + " milliseconds");
   }
 
   sTop(){
+    let t0 = performance.now();
     console.log("Top: " + this.pila.top().name);
+    let t1 = performance.now();
+
+    console.log("top 1 product took: ");
+    console.warn((t1 - t0) + " milliseconds");
   }
 
   sClear(){
@@ -143,21 +153,11 @@ export class AppComponent implements OnInit {
   }
 
   dGetSize() {
-    let t0 = performance.now();
     console.log("Size: " + this.dArray.getSize());
-    let t1 = performance.now();
-
-    console.log("find 1 node took: ");
-    console.warn((t1 - t0) + " milliseconds");
   }
 
   dGetCapacity() {
-    let t0 = performance.now();
     console.log("Capacity: " + this.dArray.getCapacity());
-    let t1 = performance.now();
-
-    console.log("find 1 node took: ");
-    console.warn((t1 - t0) + " milliseconds");
   }
 
   pushNodesFront(quantity: number) {
